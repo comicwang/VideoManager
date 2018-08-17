@@ -1,17 +1,27 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<script src="~/Scripts/jquery.form.js"></script>
+<style>
+    .inputfile {
+        opacity: 0;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#file').change(function () {
+            $('form').ajaxSubmit({
+                url: "../Home/Upload",
+                type: 'post',
+                success: function (data) {
+                    $('img').attr('src', data.pic);
+                }
+            });
+        })
+    })
+</script>
+<form id="form_upload" method="post" action="Upload" enctype="multipart/form-data">
+    <input type="file" name="uploadFile" id="file" accept="video/*" class="inputfile" />
+    <label for="file" class='btn btn-success'>选择一个视频文件</label>
+    <img style="width:300px" />
+</form>

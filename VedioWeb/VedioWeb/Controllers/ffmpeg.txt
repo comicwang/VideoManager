@@ -1,0 +1,39 @@
+﻿  /*
+         * 
+         * 这里简单说一下：FFmpeg是用于录制、转换和流化音频和视频的完整解决方案，一套领先的音/视频编解码类库。官方正式版ffmpeg不支持rmvb和rm格式. 不过有很多解决方法
+            FFmpeg的官方网址是 http://ffmpeg.mplayerhq.hu/ 。
+            中文Wiki是 http://www.ffmpeg.com.cn/ ，资料很多。
+ 
+            示例1： 
+            截取一张352x240尺寸大小的，格式为jpg的图片：  
+            ffmpeg -i test.asf -y -f image2 -t 0.001 -s 352x240 a.jpg
+ 
+            示例2： 
+            把视频的前３０帧转换成一个Animated Gif ：  
+            ffmpeg -i test.asf -vframes 30 -y -f gif a.gif
+ 
+            示例3：这个是我需要的！ 
+            在视频的第8.01秒处截取 320*240 的缩略图
+            ffmpeg -i test.flv -y -f mjpeg -ss 3 -t 0.001 -s 320x240 test.jpg
+ 
+            其中：
+            source：是原始文件的名字，可以是mov，mpeg，avi，wmv各类格式，ffmpeg基本都支持。 
+            -s wxh: 指定视频的宽和高 
+            -b : 设定视频的比特率 
+            -aspect: 保持视频的比率。如4:3或者16:9 
+            -y : 如果目标文件存在时，直接覆盖原有的目标文件。 
+            -f : 指定转换的文件格式，这里是flv格式。（其实如果不指定文件格式，ffmpeg也会按文件的后缀名来进行转换）。 
+            dest: 转换的目标文件名字，并不一定需要是flv，可以是mov，mpeg以及其他的常用格式。 
+            参数说明：
+            -L license
+            -h 帮助
+            -fromats 显示可用的格式，编解码的，协议的
+            -f fmt 强迫采用格式fmt
+            -I filename 输入文件
+            -y 覆盖输出文件
+            -t duration 设置纪录时间 hh:mm:ss[.xxx]格式的记录时间也支持
+            -ss position 搜索到指定的时间 [-]hh:mm:ss[.xxx]的格式也支持
+            s wxh: 指定视频的宽和高
+            ****************************************************************************
+            示例3：是针对flv格式的视频获得指定处的缩略图，记住 -f强制转换的格式是mjpeg因为我要获得.jpg的缩略图，网上有很多写成文章都是写成ffmpeg -i test.flv -y -f image2 -ss 08.010 -t 0.001 -s 352x240 b.jpg 这个是错误，不可能输出.
+        */
